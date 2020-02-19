@@ -268,7 +268,7 @@
                     }
                 }
 
-                if(domtoimage.impl.options.scrollFix && domtoimage.impl.options.scrollVisible && (
+                if(domtoimage.impl.options.scrollFix && !domtoimage.impl.options.scrollVisible && (
                     clone.style.overflow === "auto" ||
                     clone.style.overflowX === "auto" ||
                     clone.style.overflowY === "auto"
