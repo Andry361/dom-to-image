@@ -13,7 +13,9 @@
         // Default cache bust is false, it will use the cache
         cacheBust: false,
         // Default scroll fix is false, it will not try to fix scrollbars
-        scrollFix: false
+        scrollFix: false,
+        // Default scroll is visible, it will not try to hide scroll bar
+        scrollVisible: true
     };
 
     var domtoimage = {
@@ -155,6 +157,12 @@
         } else {
             domtoimage.impl.options.scrollFix = options.scrollFix;
         }
+
+        if(typeof(options.scrollFix) === 'undefined') {
+            domtoimage.impl.options.scrollVisible = defaultOptions.scrollVisible;
+        } else {
+            domtoimage.impl.options.scrollVisible = options.scrollVisible;
+        }
     }
 
     function draw(domNode, options) {
@@ -259,6 +267,14 @@
                         });
                     }
                 }
+
+                if(domtoimage.impl.options.scrollFix && domtoimage.impl.options.scrollVisible && (
+                    clone.style.overflow === "auto" ||
+                    clone.style.overflowX === "auto" ||
+                    clone.style.overflowY === "auto"
+                  )) {
+                    clone.style.overflow = "hidden"
+                  }
 
                 if(domtoimage.impl.options.scrollFix &&
                     (original.scrollTop || original.scrollLeft)) {
